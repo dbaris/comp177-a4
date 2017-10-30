@@ -27,13 +27,19 @@ public class BarGraph{
         
         //line(this.x + this.w * .15, this.y + this.h * 0.9, this.x + this.w, this.y + this.h * 0.9);
         
-        float ratio = this.w / maxHappy;
+        float ratio = this.w * .85 / maxHappy;
         float interval = this.h / countries.size();
         float barHeight = interval * 0.9;
-        float barPos = 0;
+        float barPos = this.x + this.w * 0.15;
         
         for (int i = 0; i < countries.size(); i++) {
-            for
+            float xPos = barPos;
+            for (int j = 0; j < 7; j++) {
+                fill(colors[j]);
+                noStroke();
+                rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
+                xPos += ratio * countries.get(i).scores[j];
+            }
         }
     }
     
