@@ -1,8 +1,8 @@
 public class Country {
 
     String name;
-    float happinessScore, GDP, socialSupport, lifeExpt,freedom;
-    float generosity, corruption, dystopia;
+    float happinessScore;
+    float [] scores;
     boolean isMarked;
     int population;
     String continent;
@@ -12,13 +12,16 @@ public class Country {
             float generosity, float corruption, float dystopia){
         this.name = name;
         this.happinessScore = happinessScore;
-        this.GDP = GDP;
-        this.socialSupport = socialSupport;
-        this.lifeExpt = lifeExpt;
-        this.freedom = freedom;
-        this.generosity = generosity;
-        this.corruption = corruption;
-        this.dystopia = dystopia;
+        
+        this.scores = new float[7];
+        
+        this.scores[0] = GDP;
+        this.scores[1] = socialSupport;
+        this.scores[2] = lifeExpt;
+        this.scores[3] = freedom;
+        this.scores[4] = generosity;
+        this.scores[5] = corruption;
+        this.scores[6] = dystopia;
         this.isMarked = true;
         this.population = 0;
         this.continent = "";
