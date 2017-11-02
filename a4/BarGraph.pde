@@ -35,12 +35,18 @@ public class BarGraph{
         for (int i = 0; i < countries.size(); i++) {
             float xPos = barPos;
             for (int j = 0; j < 7; j++) {
+                fill(0);
+                textAlign(RIGHT, TOP);
+                textSize(barHeight/2);
+                text(countries.get(i).name, barPos - width * .01, this.y + interval * i);
+              
                 fill(colors[j]);
                 noStroke();
                 rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
                 xPos += ratio * countries.get(i).scores[j];
             }
         }
+        
     }
     
   
