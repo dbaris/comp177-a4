@@ -18,6 +18,7 @@ public class ScatterPlot{
   }
   
   public void render(ArrayList<Country> countries, float maxHappy) {
+      //println(this.state);
       stroke(0);
       line(this.x, this.y, this.x, this.y + this.h * 0.9);
       line(this.x, this.y + this.h * 0.9, this.x + this.w, this.y + this.h * 0.9);
@@ -76,6 +77,7 @@ public class ScatterPlot{
           float cur_happy = countries.get(i).happinessScore;
           float normalizeX = (cur_value - minValue)/ (maxValue - minValue);
           float normalizeY = (cur_happy - minHappy) / (maxHappy - minHappy);
+          fill(cArray[this.state]);
           stroke(cArray[this.state]);
           ellipse(normalizeX * this.w + this.x, this.y + this.h * 0.9 * normalizeY, 8, 8); 
           

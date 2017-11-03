@@ -17,34 +17,49 @@ public class BarGraph{
       
     }
   
-    public void render(ArrayList<Country> countries, float maxHappy){
-        //fill(0, 100, 0);
-        //rect(this.x, this.y, this.w, this.h);
+    public void render(ArrayList<Country> countries, int barState, float maxHappy){
         
         // Draw Axes
         stroke(0);
         line(this.x + this.w * .15, this.y, this.x + this.w * .15, this.y + this.h * 0.9);
-        
-        //line(this.x + this.w * .15, this.y + this.h * 0.9, this.x + this.w, this.y + this.h * 0.9);
         
         float ratio = this.w * .85 / maxHappy;
         float interval = this.h / countries.size();
         float barHeight = interval * 0.9;
         float barPos = this.x + this.w * 0.15;
         
+        if (barState != 8) {
+          float maxVal = countries.get(0).scores[barState];
+          for (int i = 1; i < countries.size(); i++) {
+            float testVal = countries.get(i).scores[barState];
+            if (testVal > maxVal) {
+              maxVal = testVal;
+            }
+          }
+          ratio = this.w * .85 / maxVal;
+        }
+        
         for (int i = 0; i < countries.size(); i++) {
             float xPos = barPos;
-            for (int j = 0; j < 7; j++) {
-                fill(0);
-                textAlign(RIGHT, TOP);
-                textSize(barHeight/2);
-                text(countries.get(i).name, barPos - width * .01, this.y + interval * i);
-              
-                fill(colors[j]);
-                noStroke();
-                rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
-                xPos += ratio * countries.get(i).scores[j];
+            
+            fill(0);
+            textAlign(RIGHT, TOP);
+            textSize(barHeight/2);
+            text(countries.get(i).name, barPos - width * .01, this.y + interval * i);
+            
+            if (barState == 8) {
+              for (int j = 0; j < 7; j++) {
+                  fill(colors[j]);
+                  noStroke();
+                  rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
+                  xPos += ratio * countries.get(i).scores[j];
+              }
+            } else {
+              fill(colors[barState]);
+              noStroke();
+              rect(barPos, this.y + interval * i, ratio * countries.get(i).scores[barState], barHeight);
             }
+            
         }
         
     }

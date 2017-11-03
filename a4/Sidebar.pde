@@ -40,7 +40,24 @@ class Sidebar {
           text(labels[i], cx, cy);
           //i++;
       }
-  }
+    }
+    
+    public int onClick(){
+      for(int i = 0; i < 7; i++) {
+        float cx = this.x + this.w /2;
+        float cy = (this.h / 14) + (this.h * i/ 7);
+        float cr = this.h / 8;
+          
+        // check if mouse is on element
+        if (abs(mouseX - cx) < cr / 2 && abs(mouseY - cy) < cr / 2) {
+          return i;
+        }
+        
+        
+      }
+      return -1;
+      
+    }
       
       
         

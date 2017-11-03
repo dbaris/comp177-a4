@@ -16,3 +16,7 @@ void draw() {
   background(255);
   mc.render();
 }
+
+void mouseClicked(){
+  mc.handleClick();
+}

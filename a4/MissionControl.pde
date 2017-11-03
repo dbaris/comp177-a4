@@ -6,10 +6,14 @@ public class MissionControl {
   ScatterPlot plot;
   Sidebar sidebar;
   float margin;
+  int clickState;
+  int barState;
 
   MissionControl(Country[] countries) {
       this.margin = height * .05;
       this.countries = countries;
+      this.clickState = -1;
+      this.barState = 8; // show all categories
       this.sidebar = new Sidebar(0, 0, width * 0.1, height);
       this.plot = new ScatterPlot(this.margin + width * .1, this.margin, 
                                   width * .4 - this.margin * 2, height/2 - this.margin * 2);
@@ -32,7 +36,16 @@ public class MissionControl {
     }
     
     this.sidebar.render();
-    this.bar.render(markedCountries, maxHappy);
+    this.bar.render(markedCountries, barState, maxHappy);
     this.plot.render(markedCountries, maxHappy);
   }
+  
+  public void handleClick(){
+    clickState = this.sidebar.onClick();
+    if (clickState != -1) {
+      this.plot.state = clickState;
+      this.barState = clickState;
+    } 
+  }
+  
 }
