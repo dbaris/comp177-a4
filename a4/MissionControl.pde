@@ -41,6 +41,10 @@ public class MissionControl {
   }
   
   public void handleClick(){
+    if (mouseButton == RIGHT) {
+      this.barState = 8;
+      return;
+    }
     clickState = this.sidebar.onClick();
     if (clickState != -1) {
       this.plot.state = clickState;
