@@ -1,20 +1,50 @@
 19
-Norway 5305383
-Denmark 5733551
-Iceland 335025
-Switzerland 8476005
-Finland 5523231
-Netherlands 17035938
-Canada 36624199
-New Zealand 4705818
-Sweden 9910701
-Australia 24450561
-Israel 8321570
-Costa Rica 4905769
-Austria 8735453
-United States 324459463
-Ireland 4761657
-Germany 82114224
-Belgium 11429336
-Luxembourg 583455
-United Kingdom 66181585
+Norway,5305383
+Denmark,5733551
+Iceland,335025
+Switzerland,8476005
+Finland,5523231
+Netherlands,17035938
+Canada,36624199
+New Zealand,4705818
+Sweden,9910701
+Australia,24450561
+Israel,8321570
+Costa Rica,4905769
+Austria,8735453
+United States,324459463
+Ireland,4761657
+Germany,82114224
+Belgium,11429336
+Luxembourg,583455
+United Kingdom,66181585
+29
+world,Europe
+Europe,Western Europe
+Europe,Northern Europe
+world,Oceania
+Oceania,Australia and New Zealand
+world,Asia
+Asia,Western Asia
+world,Americas
+Americas,Central America
+Americas,Northern America
+Northern Europe,Norway
+Northern Europe,Denmark
+Northern Europe,Iceland
+Western Europe,Switzerland
+Northern Europe,Finland
+Western Europe,Netherlands
+Northern America,Canada
+Australia and New Zealand,New Zealand
+Northern Europe,Sweden
+Australia and New Zealand,Australia
+Western Asia,Israel
+Central America,Costa Rica
+Western Europe,Austria
+Northern America,United States
+Northern Europe,Ireland
+Western Europe,Germany
+Western Europe,Belgium
+Western Europe,Luxembourg
+Northern Europe,United Kingdom
