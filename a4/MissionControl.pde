@@ -2,7 +2,7 @@ public class MissionControl {
 
   Country[] countries;
   BarGraph bar;
-  //SquarifiedTreeMap tree;
+  SquarifiedTreeMap tree;
   ScatterPlot plot;
   Sidebar sidebar;
   float margin;
@@ -20,7 +20,8 @@ public class MissionControl {
       this.bar = new BarGraph(width / 2 + this.margin, this.margin,
                          width / 2 - this.margin * 2, 
                          height - this.margin * 2);
-      
+      this.tree = new SquarifiedTreeMap(treepath, this.margin + width * .1, height/2, 
+                                        width * .4 - this.margin * 2, height/2 - this.margin * 2);
   }
  
   public void render(){
@@ -38,6 +39,7 @@ public class MissionControl {
     this.sidebar.render();
     this.bar.render(markedCountries, barState, maxHappy);
     this.plot.render(markedCountries, maxHappy);
+    this.tree.render();
   }
   
   public void handleClick(){

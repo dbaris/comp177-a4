@@ -38,12 +38,13 @@ with open(outpath, "w") as f:
 		subregion_num += len(x)
 
 	total_relations = len(lines) + subregion_num + len(continent_sub.keys())
-					  # number of subregion-country relations
+					   # number of subregion-country relations
 					   # number of continent-subregion relations
 					   # number of world-continent relations
 	f.write(str(total_relations) + '\n')
 	for c in continent_sub.keys():
 		f.write("world," + c + '\n')
+	for c in continent_sub.keys():
 		for s in continent_sub[c]:
 			f.write(c + ',' + s + '\n')
 
