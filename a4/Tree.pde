@@ -18,49 +18,35 @@ public class Tree {
   
     Node root;
     ArrayList<Node> allNodes;
-    String[] labels, parents, children;
-    int[] weights;
   
     Tree(String[] labels, int[] weights, String[] parents, String[] children) {
-      
-        this.allNodes = new ArrayList<Node>(); 
-        this.labels = labels;
-        this.parents = parents;
-        this.children = children;
-        this.weights = weights;
-        
-        if (this.parents.length == 0) { // if tree is empty, set root to null
-            this.root = null;
+        allNodes = new ArrayList<Node>();
+        if (parents.length == 0) {
+            root = null;
         } else {
-            this.root = new Node(this.parents[0], this.getWeight(this.parents[0], this.labels, this.weights));
-            this.allNodes.add(this.root); // add root to the list of all nodes
-            
-            for (int i = 0; i < this.parents.length; i++) { // iterating through the parents
-                boolean newNode = false;               // assume it's already seen
-                Node r = this.getNode(this.parents[i]);     // null if new parent
-                Node c = this.getNode(this.children[i]);    // null if new child
-                // if either parent or child is new, make new
-                // nodes, then add to list of all nodes
-                if (r == null) { 
-                    //println(this.parents[i]);
-                    r = new Node(this.parents[i], this.getWeight(this.parents[i], this.labels, this. weights));
-                    this.allNodes.add(r);
+            boolean newNode = false;
+            root = new Node(parents[0], getWeight(parents[0], labels, weights));
+            allNodes.add(root);
+            for (int i = 0; i < parents.length; i++) {
+                Node r = getNode(parents[i]);
+                Node c = getNode(children[i]);
+                if (r == null) {
+                    r = new Node(parents[i], getWeight(parents[i], labels, weights));
+                    allNodes.add(r);
                 }
                 if (c == null) {
                     newNode = true;
-                    c = new Node(this.children[i], this.getWeight(this.children[i], this.labels, this.weights));
-                    this.allNodes.add(c);
+                    c = new Node(children[i], getWeight(children[i], labels, weights));
+                    allNodes.add(c);
                 }
-
                 if (!newNode && !isRoot(c.label)) {
                     Node oldParent = c.parent;
                     appendChild(oldParent, r);
                     r.parent = oldParent;
                 }
-                
-                this.appendChild(r, c);
-                if (this.isRoot(c.label)){
-                    this.root = r;
+                appendChild(r, c);
+                if (isRoot(c.label)){
+                    root = r;
                 }
             }
         }
@@ -74,7 +60,7 @@ public class Tree {
     }
     
     boolean isRoot(String label) {
-        return(label == root.label);
+        return(label.equals(root.label));
     }
     
     void trickleDown(Node r) {
@@ -95,16 +81,16 @@ public class Tree {
     
     int getWeight(String label, String[] labels, int[] weights) {
         for (int i = 0; i < labels.length; i++) {
-            if (labels[i] == label) return weights[i];
+            if (labels[i].equals(label)) return weights[i];
         }
         return 0;
     }
     
     Node getNode(String label) {
-        Node result = null; //getNodeInternal(label, this.root);
+        Node result = getNodeInternal(label, root);
         if (result == null) {
-            for (Node ch: this.allNodes) {
-                if (ch.label == label) {
+            for (Node ch: allNodes) {
+                if (ch.label.equals(label)) {
                     result = ch;
                     break;
                 }
@@ -116,7 +102,7 @@ public class Tree {
     Node getNodeInternal(String label, Node r) {
         if (r == null) {
             return null;
-        } else if (r.label == label) {
+        } else if (r.label.equals(label)) {
             return r;
         } else {
             Node result = null;
