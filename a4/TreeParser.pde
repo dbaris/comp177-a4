@@ -1,17 +1,17 @@
 public class TreeParser {
-
+    
     String[] lines;
-    int num_leaves;   // number of leaves
-    int num_rel;      // number of relations
-    String[] labels;  // array of countries 
-    int[] weights;    // population of countries
-    String[] parents; 
+    int num_leaves;
+    String[] labels;
+    int[] weights;
+    String[] parents;
     String[] children;
+    int num_rel;
 
     TreeParser(String filePath) {
         lines = loadStrings(filePath);
-        num_leaves = int(lines[0]); 
-        num_rel = int(lines[num_leaves + 1]);
+        num_leaves = int(lines[0].split(",")[0]); 
+        num_rel = int(lines[num_leaves + 1].split(",")[0]);
         labels = new String[num_leaves];
         weights = new int[num_leaves];
         parents = new String[num_rel];
@@ -29,4 +29,5 @@ public class TreeParser {
             children[i] = line[1];
         }  
     } 
+  
 }

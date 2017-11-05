@@ -47,21 +47,59 @@ public class BarGraph{
             textSize(barHeight/2);
             text(countries.get(i).name, barPos - width * .01, this.y + interval * i);
             
+            
+            
             if (barState == 8) {
               for (int j = 0; j < 7; j++) {
                   fill(colors[j]);
+                  
+                  if (countries.get(i).hover) {
+                    colorMode(HSB, 360, 100, 100);
+                    fill(hue(colors[j]), saturation(colors[j]), brightness(colors[j]) + 20);
+                    colorMode(RGB, 255);
+                  }
                   noStroke();
                   rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
                   xPos += ratio * countries.get(i).scores[j];
+    
               }
+              if (mouseX > barPos && mouseX < xPos && mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
+                  countries.get(i).hover = true;
+              } else {
+                  countries.get(i).hover = false;
+              }
+              
             } else {
+              
               fill(colors[barState]);
+              
+              if (countries.get(i).hover) {
+                    colorMode(HSB, 360, 100, 100);
+                    fill(hue(colors[barState]), saturation(colors[barState]), brightness(colors[barState]) + 20);
+                    colorMode(RGB, 255);
+                    //println("hovering!");
+              }
+              
               noStroke();
               rect(barPos, this.y + interval * i, ratio * countries.get(i).scores[barState], barHeight);
+              
+              if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+                if (mouseX > barPos && mouseX < ratio * countries.get(i).scores[barState] + this.x && 
+                    mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
+                    countries.get(i).hover = true;
+                } else {
+                    countries.get(i).hover = false;
+                }
+              }
+              
             }
             
         }
         
+    }
+    
+    boolean checkHover(ArrayList<Country> countries){
+      return (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h);
     }
     
   

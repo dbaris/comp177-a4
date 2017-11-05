@@ -4,13 +4,14 @@ Arrange a;
 Area area;
 Node startNode;
 boolean found;
-boolean pressed;
+
 boolean transition; 
 float transparency;
 
 public class SquarifiedTreeMap{
   
     float x, y, w, h;
+    boolean pressed;
   
     SquarifiedTreeMap (String treepath, float x, float y, float w, float h) {
         tp = new TreeParser(treepath);
@@ -25,6 +26,7 @@ public class SquarifiedTreeMap{
         this.h = h;
         transition = false;
         transparency = 255;
+        this.pressed = false;
     }
     
     void render() {

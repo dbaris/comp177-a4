@@ -21,7 +21,7 @@ public class MissionControl {
                          width / 2 - this.margin * 2, 
                          height - this.margin * 2);
       this.tree = new SquarifiedTreeMap(treepath, this.margin + width * .1, height/2, 
-                                        width * .4 - this.margin * 2, height/2 - this.margin * 2);
+                                        width * .42 - this.margin * 2, height * 0.55 - (this.margin * 2));
   }
  
   public void render(){
@@ -30,28 +30,32 @@ public class MissionControl {
     for (int i = 0; i < this.countries.length; i++){
       if (this.countries[i].isMarked) {
         markedCountries.add(this.countries[i]);
+        //this.countries[i].hover = false;
         if(this.countries[i].happinessScore > maxHappy) {
           maxHappy = this.countries[i].happinessScore;
+          
         }
       }
     }
-    
+
     this.sidebar.render();
     this.bar.render(markedCountries, barState, maxHappy);
     this.plot.render(markedCountries, maxHappy);
-    this.tree.render();
+    //this.tree.render();
   }
   
   public void handleClick(){
     if (mouseButton == RIGHT) {
       this.barState = 8;
+      this.tree.pressed = true;
       return;
     }
     clickState = this.sidebar.onClick();
     if (clickState != -1) {
       this.plot.state = clickState;
       this.barState = clickState;
-    } 
+    }
+    this.tree.pressed = true;
   }
   
 }

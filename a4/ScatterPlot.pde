@@ -2,7 +2,7 @@
 
 public class ScatterPlot{
   float x, y, w, h;
-  int state;
+  int state, diameter;
   color []cArray = {color(144, 50, 105), color(0, 79, 130), color(78, 33, 68),
                   color(0, 72, 0), color(205, 136, 0), color (11, 0, 61), 
                   color(125, 23, 23)};
@@ -15,6 +15,7 @@ public class ScatterPlot{
     this.w = w;
     this.h = h;
     this.state = 0; // start state - GDP
+    this.diameter = 8;
   }
   
   public void render(ArrayList<Country> countries, float maxHappy) {
@@ -78,8 +79,26 @@ public class ScatterPlot{
           float normalizeX = (cur_value - minValue)/ (maxValue - minValue);
           float normalizeY = (cur_happy - minHappy) / (maxHappy - minHappy);
           fill(cArray[this.state]);
+          
+          if (countries.get(i).hover) {
+            colorMode(HSB, 360, 100, 100);
+            fill(hue(cArray[this.state]), saturation(cArray[this.state]), brightness(cArray[this.state]) + 50);
+            colorMode(RGB, 255);
+        
+          }
+          
+          if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+            if (abs(mouseX - normalizeX * this.w + this.x) < this.diameter / 2 && 
+                abs(mouseY - this.y + this.h * 0.9 * normalizeY) < this.diameter/2) {
+                  countries.get(i).hover = true;
+                  println("ERROR IS HERE !");
+            } else {
+                  countries.get(i).hover = false;
+            }
+          }
+          
           stroke(cArray[this.state]);
-          ellipse(normalizeX * this.w + this.x, this.y + this.h * 0.9 * normalizeY, 8, 8); 
+          ellipse(normalizeX * this.w + this.x, this.y + this.h * 0.9 * normalizeY, diameter, diameter); 
           
       }
       

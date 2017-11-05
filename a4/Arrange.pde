@@ -1,6 +1,8 @@
 import java.util.*;
 import java.lang.*;
 
+color corruption = color(255, 255, 255);
+
 // Class Area represents a rectangular area with its
 // x, y coordinates, its width and height, and a bool
 // indicating whether it is horizontal.
@@ -55,7 +57,7 @@ class WNode{
 public class Arrange{
     WNode root; // root of the working tree
     Tree tree;  // tree from which nodes to be arranged
-    float space = 5;
+    float space = 3;
   
     Arrange(Tree t){
         root = null;
@@ -71,7 +73,7 @@ public class Arrange{
     WNode getNodeInternal(String label, WNode r) {
         if (r == null) {
             return null;
-        } else if (r.label == label) {
+        } else if (r.label.equals(label)) {
             return r;
         } else {
             WNode result = null;
@@ -115,18 +117,22 @@ public class Arrange{
         }
         if (hovering(r)&& b) {
           //colorMode(HSB, 360, 100, 100);
-          fill(color(255 - lev * 20, 255  - lev * 15, 250 - lev * 10));
+         
+          fill(240);
         }
         else {
             //colorMode(RGB, 255);
-            fill(color(135 - lev * 10, 206  - lev * 20, 280 - lev * 40));
+            fill(red(corruption) - lev * 10, green(corruption) - lev * 20, blue(corruption) - lev * 40f);
+            //fill(color(135 - lev * 10, 206  - lev * 20, 280 - lev * 40));
             
         }
         rect(r.a.x_coor, r.a.y_coor, r.a.w, r.a.h, 4);
-        stroke(color(25, 25, 112));
-        textAlign(CENTER, CENTER);
-        fill(0);
-        text(label, r.a.x_coor + r.a.w/2, r.a.y_coor + r.a.h/2);
+        if (r.a.w > label.length() * 8 && r.a.h > 5 && lev == 1) { 
+          stroke(color(25, 25, 112));
+          textAlign(CENTER, CENTER);
+          fill(0);
+          text(label, r.a.x_coor + r.a.w/2, r.a.y_coor + r.a.h/2);
+        }
     }
 
     // add a level of children from one node r

@@ -3,7 +3,7 @@ public class Country {
     String name;
     float happinessScore;
     float [] scores;
-    boolean isMarked;
+    boolean isMarked, hover;
     int population;
     String continent;
     
@@ -12,6 +12,7 @@ public class Country {
             float generosity, float corruption, float dystopia){
         this.name = name;
         this.happinessScore = happinessScore;
+        this.hover = false;
         
         this.scores = new float[7];
         
