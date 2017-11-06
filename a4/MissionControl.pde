@@ -41,7 +41,7 @@ public class MissionControl {
     this.sidebar.render();
     this.bar.render(markedCountries, barState, maxHappy);
     this.plot.render(markedCountries, maxHappy);
-    //this.tree.render();
+    this.tree.render();
   }
   
   public void handleClick(){

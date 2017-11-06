@@ -84,14 +84,12 @@ public class ScatterPlot{
             colorMode(HSB, 360, 100, 100);
             fill(hue(cArray[this.state]), saturation(cArray[this.state]), brightness(cArray[this.state]) + 50);
             colorMode(RGB, 255);
-        
           }
           
           if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
-            if (abs(mouseX - normalizeX * this.w + this.x) < this.diameter / 2 && 
-                abs(mouseY - this.y + this.h * 0.9 * normalizeY) < this.diameter/2) {
+            if (abs(mouseX - (normalizeX * this.w + this.x)) < this.diameter/2 && 
+                abs(mouseY - (this.y + this.h * 0.9 * normalizeY)) < this.diameter/2) {
                   countries.get(i).hover = true;
-                  println("ERROR IS HERE !");
             } else {
                   countries.get(i).hover = false;
             }

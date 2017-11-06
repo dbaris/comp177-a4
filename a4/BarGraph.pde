@@ -63,12 +63,13 @@ public class BarGraph{
                   xPos += ratio * countries.get(i).scores[j];
     
               }
-              if (mouseX > barPos && mouseX < xPos && mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
-                  countries.get(i).hover = true;
-              } else {
-                  countries.get(i).hover = false;
+              if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+                  if (mouseX > barPos && mouseX < xPos && mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
+                      countries.get(i).hover = true;
+                  } else {
+                      countries.get(i).hover = false;
+                  }
               }
-              
             } else {
               
               fill(colors[barState]);
