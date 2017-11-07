@@ -88,7 +88,7 @@ public class Arrange{
     }
     
     // draws tree with root r on canvas
-    public void drawFrom(Node r, Area canvas, ArrayList<Country> countries) {
+    public void drawFrom(Node r, Area canvas, Country[] countries) {
           // initialize working tree node]
           root = new WNode(r.label, r.weight);
           updateArea(root, canvas.x_coor, canvas.y_coor, canvas.w, canvas.h);
@@ -107,7 +107,7 @@ public class Arrange{
     }
     
     // draws a rectangle based on the working node info
-    void drawRec(WNode r, ArrayList<Country> countries) {
+    void drawRec(WNode r, Country[] countries) {
         String label = r.label;
         boolean b = true;
         int lev = tree.getNode(r.label).level;
@@ -169,7 +169,7 @@ public class Arrange{
     }
 
     // lays out children from r on canvas
-    public void order(WNode r, Area canvas, ArrayList<Country> countries) {
+    public void order(WNode r, Area canvas, Country[] countries) {
         float total_weight = 0;
         if (r == null) return; // if root null, do nothing
         buildTree(r, t.getNode(r.label).children); // add all children of r
@@ -183,7 +183,7 @@ public class Arrange{
     }
     
     // renders all rectangles in a tree
-    void drawAll(WNode r, ArrayList<Country> countries) {
+    void drawAll(WNode r, Country[] countries) {
         drawRec(r, countries);
         for (WNode c: r.children) drawAll(c, countries);
     }
