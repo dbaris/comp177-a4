@@ -13,13 +13,13 @@ public class SquarifiedTreeMap{
     float x, y, w, h;
     boolean pressed;
   
-    SquarifiedTreeMap (String treepath, float x, float y, float w, float h) {
+    SquarifiedTreeMap (String treepath, float x, float y, float w, float h, ArrayList<Country> countries) {
         tp = new TreeParser(treepath);
         t = new Tree(tp.labels, tp.weights, tp.parents, tp.children);
         a = new Arrange(t); // pass the tree to be arranged
         startNode = t.root; // initialize the graph to the root
         area = new Area(x, y, w, h);
-        a.drawFrom(startNode, area);
+        a.drawFrom(startNode, area, countries);
         this.x = x;
         this.y = y;
         this.w = w;
@@ -29,22 +29,33 @@ public class SquarifiedTreeMap{
         this.pressed = false;
     }
     
-    void render() {
+    boolean onGraph(){
+      return (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h);
+    }
+    
+    void markChildren(Node root, ArrayList<Country> countries) {
+    
+    }
+    
+    void render(ArrayList<Country> countries) {
         if (pressed && (mouseButton == LEFT)) {
                 Node newStart = t.getNode(locateNode(a.root).label);
                 if (startNode != newStart) {
                     startNode = newStart;
-                    transition = true;
+                    //transition = true;
                 }
+                markChildren(newStart, countries);
             
         } else if (pressed && mouseButton == RIGHT) {
             if (startNode.parent != null){
                 startNode = startNode.parent;
-                transition = true;
+                //transition = true;
+                markChildren(startNode, countries);
             }
+            
         }
         area = new Area(x, y, w, h);
-        a.drawFrom(startNode, area);
+        a.drawFrom(startNode, area, countries);
         
         if (transition) {
             if (transparency == 5) {

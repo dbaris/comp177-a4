@@ -2,6 +2,7 @@ public class BarGraph{
 
     float x, y, w, h; 
     color colors[];
+    String labels[];
   
     BarGraph(float x, float y, float w, float h){
         this.x = x;
@@ -12,7 +13,10 @@ public class BarGraph{
         color []cArray = {color(144, 50, 105), color(0, 79, 130), color(78, 33, 68),
                   color(0, 72, 0), color(205, 136, 0), color (11, 0, 61), 
                   color(125, 23, 23)};
+        String[] labels_temp = {"GDP per capita", "Social Support", "Life Expectancy", "Freedom", "Generosity", 
+                           "Corruption", "Dystopia (residual)", "Happiness Score"};
         this.colors = cArray;
+        this.labels = labels_temp;
         //println(colors);
       
     }
@@ -23,12 +27,17 @@ public class BarGraph{
         stroke(0);
         line(this.x + this.w * .15, this.y, this.x + this.w * .15, this.y + this.h * 0.9);
         
+        textAlign(CENTER, TOP);
+        fill(0);
+        text(this.labels[barState], this.x + this.w/2, this.y + this.h);
+      
+        
         float ratio = this.w * .85 / maxHappy;
         float interval = this.h / countries.size();
         float barHeight = interval * 0.9;
         float barPos = this.x + this.w * 0.15;
         
-        if (barState != 8) {
+        if (barState != 7) {
           float maxVal = countries.get(0).scores[barState];
           for (int i = 1; i < countries.size(); i++) {
             float testVal = countries.get(i).scores[barState];
@@ -49,7 +58,7 @@ public class BarGraph{
             
             
             
-            if (barState == 8) {
+            if (barState == 7) {
               for (int j = 0; j < 7; j++) {
                   fill(colors[j]);
                   

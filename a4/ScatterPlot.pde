@@ -18,6 +18,10 @@ public class ScatterPlot{
     this.diameter = 8;
   }
   
+  public boolean onGraph() {
+    return mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h;
+  }
+  
   public void render(ArrayList<Country> countries, float maxHappy) {
       //println(this.state);
       stroke(0);
@@ -88,7 +92,7 @@ public class ScatterPlot{
           
           if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
             if (abs(mouseX - (normalizeX * this.w + this.x)) < this.diameter/2 && 
-                abs(mouseY - (this.y + this.h * 0.9 * normalizeY)) < this.diameter/2) {
+                abs(mouseY - ((this.y + this.h * .9) - this.h * 0.9 * normalizeY)) < this.diameter/2) {
                   countries.get(i).hover = true;
             } else {
                   countries.get(i).hover = false;
@@ -96,7 +100,7 @@ public class ScatterPlot{
           }
           
           stroke(cArray[this.state]);
-          ellipse(normalizeX * this.w + this.x, this.y + this.h * 0.9 * normalizeY, diameter, diameter); 
+          ellipse(normalizeX * this.w + this.x, (this.y + this.h * .9) - this.h * 0.9 * normalizeY, diameter, diameter); 
           
       }
       

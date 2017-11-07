@@ -3,6 +3,8 @@ import java.lang.*;
 
 color corruption = color(255, 255, 255);
 
+color[] colorArray = {color(205, 136, 0), #457FA4, #004F82, #003A5F, #00243C};
+
 // Class Area represents a rectangular area with its
 // x, y coordinates, its width and height, and a bool
 // indicating whether it is horizontal.
@@ -86,14 +88,14 @@ public class Arrange{
     }
     
     // draws tree with root r on canvas
-    public void drawFrom(Node r, Area canvas) {
+    public void drawFrom(Node r, Area canvas, ArrayList<Country> countries) {
           // initialize working tree node]
           root = new WNode(r.label, r.weight);
           updateArea(root, canvas.x_coor, canvas.y_coor, canvas.w, canvas.h);
           // draws the root onto canvas
-          drawRec(root);
+          drawRec(root, countries);
           // order its children
-          order(root, canvas);
+          order(root, canvas, countries);
     }
 
     // updates the area field of selected node
@@ -105,7 +107,7 @@ public class Arrange{
     }
     
     // draws a rectangle based on the working node info
-    void drawRec(WNode r) {
+    void drawRec(WNode r, ArrayList<Country> countries) {
         String label = r.label;
         boolean b = true;
         int lev = tree.getNode(r.label).level;
@@ -117,14 +119,31 @@ public class Arrange{
         }
         if (hovering(r)&& b) {
           //colorMode(HSB, 360, 100, 100);
-         
-          fill(240);
+          fill(colorArray[0]);
+          for (Country c : countries) {
+              if (c.name.equals(label)) {
+                c.hover = true;
+                //break;
+              } else {
+                c.hover = false;
+              }
+          }
+          
         }
         else {
-            //colorMode(RGB, 255);
-            fill(red(corruption) - lev * 10, green(corruption) - lev * 20, blue(corruption) - lev * 40f);
-            //fill(color(135 - lev * 10, 206  - lev * 20, 280 - lev * 40));
+            colorMode(RGB, 255);
             
+            fill(colorArray[lev]);
+            
+            // check if country is being hovered
+            for (Country c : countries) {
+              if (c.name.equals(label)) {
+                if (c.hover){
+                  fill(colorArray[0]);
+                }
+                break;
+              }
+            }
         }
         rect(r.a.x_coor, r.a.y_coor, r.a.w, r.a.h, 4);
         if (r.a.w > label.length() * 8 && r.a.h > 5 && lev == 1) { 
@@ -150,7 +169,7 @@ public class Arrange{
     }
 
     // lays out children from r on canvas
-    public void order(WNode r, Area canvas) {
+    public void order(WNode r, Area canvas, ArrayList<Country> countries) {
         float total_weight = 0;
         if (r == null) return; // if root null, do nothing
         buildTree(r, t.getNode(r.label).children); // add all children of r
@@ -158,15 +177,15 @@ public class Arrange{
         squarify(r.children, new ArrayList<WNode>(), canvas, total_weight);
         
         for (WNode child: r.children) {
-            order(child, getNode(child.label).a);
+            order(child, getNode(child.label).a, countries);
         }
-        drawAll(r);
+        drawAll(r, countries);
     }
     
     // renders all rectangles in a tree
-    void drawAll(WNode r) {
-        drawRec(r);
-        for (WNode c: r.children) drawAll(c);
+    void drawAll(WNode r, ArrayList<Country> countries) {
+        drawRec(r, countries);
+        for (WNode c: r.children) drawAll(c, countries);
     }
     
     public void squarify(ArrayList<WNode> children, ArrayList<WNode> row, Area canvas, float total_weight) {

@@ -13,15 +13,16 @@ public class MissionControl {
       this.margin = height * .05;
       this.countries = countries;
       this.clickState = -1;
-      this.barState = 8; // show all categories
+      this.barState = 7; // show all categories
       this.sidebar = new Sidebar(0, 0, width * 0.1, height);
       this.plot = new ScatterPlot(this.margin + width * .1, this.margin, 
                                   width * .4 - this.margin * 2, height/2 - this.margin * 2);
       this.bar = new BarGraph(width / 2 + this.margin, this.margin,
                          width / 2 - this.margin * 2, 
                          height - this.margin * 2);
+      ArrayList<Country> countries_temp = new ArrayList<Country>();
       this.tree = new SquarifiedTreeMap(treepath, this.margin + width * .1, height/2, 
-                                        width * .42 - this.margin * 2, height * 0.55 - (this.margin * 2));
+                                        width * .42 - this.margin * 2, height * 0.55 - (this.margin * 2), countries_temp);
   }
  
   public void render(){
@@ -41,21 +42,40 @@ public class MissionControl {
     this.sidebar.render();
     this.bar.render(markedCountries, barState, maxHappy);
     this.plot.render(markedCountries, maxHappy);
-    this.tree.render();
+    this.tree.render(markedCountries);
   }
   
   public void handleClick(){
-    if (mouseButton == RIGHT) {
-      this.barState = 8;
-      this.tree.pressed = true;
-      return;
-    }
+    
     clickState = this.sidebar.onClick();
     if (clickState != -1) {
       this.plot.state = clickState;
       this.barState = clickState;
+      if (mouseButton == RIGHT) {
+        this.barState = 7;
+        
+      }
     }
-    this.tree.pressed = true;
+    
+    // scatterplot 
+    else if (this.plot.onGraph()) {
+      
+    } else if (this.tree.onGraph()) {
+      this.tree.pressed = true;
+    }
+    
+    
+    //if (mouseButton == RIGHT) {
+    //  this.barState = 8;
+    //  this.tree.pressed = true;
+    //  return;
+    //}
+    //clickState = this.sidebar.onClick();
+    //if (clickState != -1) {
+    //  this.plot.state = clickState;
+    //  this.barState = clickState;
+    //}
+    //this.tree.pressed = true;
   }
   
 }
