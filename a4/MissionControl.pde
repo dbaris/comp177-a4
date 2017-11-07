@@ -20,9 +20,8 @@ public class MissionControl {
       this.bar = new BarGraph(width / 2 + this.margin, this.margin,
                          width / 2 - this.margin * 2, 
                          height - this.margin * 2);
-      ArrayList<Country> countries_temp = new ArrayList<Country>();
       this.tree = new SquarifiedTreeMap(treepath, this.margin + width * .1, height/2, 
-                                        width * .42 - this.margin * 2, height * 0.55 - (this.margin * 2), countries_temp);
+                                        width * .42 - this.margin * 2, height * 0.55 - (this.margin * 2), countries);
   }
  
   public void render(){
