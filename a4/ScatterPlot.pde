@@ -48,16 +48,24 @@ public class ScatterPlot{
       
       float minValue = countries.get(0).scores[state];
       float maxValue = countries.get(0).scores[state];
-      float minHappy = countries.get(countries.size() - 1).happinessScore;
+      float minHappy = countries.get(0).happinessScore;
+      maxHappy = countries.get(0).happinessScore;
       
       
       for (int i = 1; i < countries.size(); i++) {
           float cur_value = countries.get(i).scores[state];
+          float cur_happy = countries.get(i).happinessScore;
           if (cur_value < minValue) {
               minValue = cur_value;
           } 
           if (cur_value > maxValue) {
               maxValue = cur_value;
+          }
+          if (cur_happy > maxHappy) {
+              maxHappy = cur_happy;
+          }
+          if (cur_happy < minHappy) {
+              minHappy = cur_happy;
           }
       }
       

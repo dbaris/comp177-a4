@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BarGraph{
 
     float x, y, w, h; 
@@ -46,6 +48,73 @@ public class BarGraph{
           }
           ratio = this.w * .85 / maxVal;
         }
+        
+        if (barState == 7) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.happinessScore);
+                    Float s2 = new Float(p2.happinessScore);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 0) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[0]);
+                    Float s2 = new Float(p2.scores[0]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 1) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[1]);
+                    Float s2 = new Float(p2.scores[1]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 2) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[2]);
+                    Float s2 = new Float(p2.scores[2]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 3) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[3]);
+                    Float s2 = new Float(p2.scores[3]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 4) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[4]);
+                    Float s2 = new Float(p2.scores[4]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 5) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[5]);
+                    Float s2 = new Float(p2.scores[5]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        } else if (barState == 6) {
+            Collections.sort(countries, new Comparator<Country>(){
+                public int compare(Country p1, Country p2){
+                    Float s1 = new Float(p1.scores[6]);
+                    Float s2 = new Float(p2.scores[6]);
+                    return -s1.compareTo(s2);
+                }
+            });
+        }
+        
         
         for (int i = 0; i < countries.size(); i++) {
             float xPos = barPos;

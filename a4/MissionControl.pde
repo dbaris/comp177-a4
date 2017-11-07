@@ -30,7 +30,6 @@ public class MissionControl {
     for (int i = 0; i < this.countries.length; i++){
       if (this.countries[i].isMarked) {
         markedCountries.add(this.countries[i]);
-        //this.countries[i].hover = false;
         if(this.countries[i].happinessScore > maxHappy) {
           maxHappy = this.countries[i].happinessScore;
           
