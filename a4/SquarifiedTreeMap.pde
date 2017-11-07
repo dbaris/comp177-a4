@@ -74,6 +74,14 @@ public class SquarifiedTreeMap{
         area = new Area(x, y, w, h);
         a.drawFrom(startNode, area, countries);
         
+        fill(0);
+        textAlign(CENTER, TOP);
+        text(startNode.label, this.x + this.w/2, this.y + this.h + 0.5);
+        
+        if (startNode.level == 1) {
+          text("Population: " + startNode.weight, this.x + this.w/2, this.y + this.h + 0.02 * height);
+        }
+        
         if (transition) {
             if (transparency == 5) {
                 transition = false;

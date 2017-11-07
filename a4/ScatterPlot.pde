@@ -50,6 +50,7 @@ public class ScatterPlot{
       float maxValue = countries.get(0).scores[state];
       float minHappy = countries.get(countries.size() - 1).happinessScore;
       
+      
       for (int i = 1; i < countries.size(); i++) {
           float cur_value = countries.get(i).scores[state];
           if (cur_value < minValue) {
@@ -59,6 +60,17 @@ public class ScatterPlot{
               maxValue = cur_value;
           }
       }
+      
+      if (minValue == maxValue) {
+          minValue -= .5;
+          maxValue += .5;
+      }
+      
+      if (minHappy == maxHappy) {
+          minHappy -= .5;
+          maxHappy += .5;
+      }
+      
       
       //float ratio = this.h / (maxHappy - minHappy);
       float xOffset =  0.1 * (maxValue - minValue);

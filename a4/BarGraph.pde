@@ -22,19 +22,18 @@ public class BarGraph{
     }
   
     public void render(ArrayList<Country> countries, int barState, float maxHappy){
-        
-        // Draw Axes
-        stroke(0);
-        line(this.x + this.w * .15, this.y, this.x + this.w * .15, this.y + this.h * 0.9);
-        
         textAlign(CENTER, TOP);
         fill(0);
         text(this.labels[barState], this.x + this.w/2, this.y + this.h);
       
-        
         float ratio = this.w * .85 / maxHappy;
         float interval = this.h / countries.size();
         float barHeight = interval * 0.9;
+        
+        if (barHeight > 60) {
+          barHeight = 60;
+        }
+        
         float barPos = this.x + this.w * 0.15;
         
         if (barState != 7) {
@@ -53,12 +52,11 @@ public class BarGraph{
             
             fill(0);
             textAlign(RIGHT, TOP);
-            textSize(barHeight/2);
-            text(countries.get(i).name, barPos - width * .01, this.y + interval * i);
-            
-            
-            
+            textSize(9);
+            text(countries.get(i).name, barPos - width * .01, this.y + interval * i + barHeight/2);
+
             if (barState == 7) {
+              
               for (int j = 0; j < 7; j++) {
                   fill(colors[j]);
                   
@@ -72,6 +70,20 @@ public class BarGraph{
                   xPos += ratio * countries.get(i).scores[j];
     
               }
+              
+              if (countries.size() == 1) {
+                  Country c = countries.get(0);
+                  int k;
+                  for (k = 0; k < 7; k++) {
+                      fill(colors[k]);
+                      textSize(12);
+                      textAlign(CENTER, CENTER);
+                      text(this.labels[k] + ": " + c.scores[k], this.x + this.w/2, this.y + this.h/5 + k * height*0.05);
+                  } 
+                  fill(0);
+                  text("Total Happiness Score: " + c.happinessScore, this.x + this.w/2, this.y + this.h/5 + k * height*0.05);
+              }
+              
               if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
                   if (mouseX > barPos && mouseX < xPos && mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
                       countries.get(i).hover = true;

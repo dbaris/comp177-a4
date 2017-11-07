@@ -1,0 +1,4 @@
+Deanna Baris
+Yuelin Liu
+
+We used a pair-programming approach for this project and implemented all aspects together.

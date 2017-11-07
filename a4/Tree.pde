@@ -60,11 +60,6 @@ public class Tree {
         root.level = maxLevel + 1;
         trickleDown(root);
         
-        for (Node n: allNodes) {
-          if (n.label.equals("Central America") || n.label.equals("Costa Rica")) {
-            println(n.weight);
-          }
-        }
     }
     
     boolean isRoot(String label) {
