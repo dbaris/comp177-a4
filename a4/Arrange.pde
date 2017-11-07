@@ -1,9 +1,20 @@
 import java.util.*;
 import java.lang.*;
 
-color corruption = color(255, 255, 255);
-
-color[] colorArray = {color(205, 136, 0), #457FA4, #004F82, #003A5F, #00243C};
+//color[] pinkArray = {color(205, 136, 0), #CCA1BA, #A45784, #762956, #5C2043};
+//color[] blueArray = {color(205, 136, 0), #A2BFD1, #457FA4, #004877, #00243C};
+//color[] purpleArray = {color(205, 136, 0), #BEAEBB, #6E4966, #401C38, #240F1F};
+//color[] greenArray = {color(205, 136, 0), #A2BCA2, #457945, #004200, #002E00};
+//color[] yellowArray = {color(0, 79, 130), #ECD3A2, #DAA845, #BB7C00, #5E3E00};
+//color[] IndigoArray = {color(205, 136, 0), #457FA4, #004F82, #003A5F, #00243C};
+//color[] redArray = {color(205, 136, 0), #C39595, #944141, #671313, #390B0B};
+color[][] colorArray = {{color(205, 136, 0), #CCA1BA, #A45784, #762956, #5C2043},
+                        {color(205, 136, 0), #A2BFD1, #457FA4, #004877, #00243C},
+                        {color(205, 136, 0), #BEAEBB, #6E4966, #401C38, #240F1F},
+                        {color(205, 136, 0), #A2BCA2, #457945, #004200, #002E00},
+                        {color(0, 79, 130), #ECD3A2, #DAA845, #BB7C00, #5E3E00},
+                        {color(205, 136, 0), #457FA4, #004F82, #003A5F, #00243C},
+                        {color(205, 136, 0), #C39595, #944141, #671313, #390B0B}};
 
 // Class Area represents a rectangular area with its
 // x, y coordinates, its width and height, and a bool
@@ -88,14 +99,14 @@ public class Arrange{
     }
     
     // draws tree with root r on canvas
-    public void drawFrom(Node r, Area canvas, Country[] countries) {
+    public void drawFrom(Node r, Area canvas, Country[] countries, int state) {
           // initialize working tree node]
           root = new WNode(r.label, r.weight);
           updateArea(root, canvas.x_coor, canvas.y_coor, canvas.w, canvas.h);
           // draws the root onto canvas
-          drawRec(root, countries);
+          drawRec(root, countries, state);
           // order its children
-          order(root, canvas, countries);
+          order(root, canvas, countries, state);
     }
 
     // updates the area field of selected node
@@ -107,7 +118,8 @@ public class Arrange{
     }
     
     // draws a rectangle based on the working node info
-    void drawRec(WNode r, Country[] countries) {
+    void drawRec(WNode r, Country[] countries, int state) {
+        color[] palette = colorArray[state];
         String label = r.label;
         boolean b = true;
         int lev = tree.getNode(r.label).level;
@@ -119,7 +131,7 @@ public class Arrange{
         }
         if (hovering(r)&& b) {
           //colorMode(HSB, 360, 100, 100);
-          fill(colorArray[0]);
+          fill(palette[0]);
           for (Country c : countries) {
               if (c.name.equals(label)) {
                 c.hover = true;
@@ -133,13 +145,13 @@ public class Arrange{
         else {
             colorMode(RGB, 255);
             
-            fill(colorArray[lev]);
+            fill(palette[lev]);
             
             // check if country is being hovered
             for (Country c : countries) {
               if (c.name.equals(label)) {
                 if (c.hover){
-                  fill(colorArray[0]);
+                  fill(palette[0]);
                 }
                 break;
               }
@@ -169,7 +181,7 @@ public class Arrange{
     }
 
     // lays out children from r on canvas
-    public void order(WNode r, Area canvas, Country[] countries) {
+    public void order(WNode r, Area canvas, Country[] countries, int state) {
         float total_weight = 0;
         if (r == null) return; // if root null, do nothing
         buildTree(r, t.getNode(r.label).children); // add all children of r
@@ -177,15 +189,15 @@ public class Arrange{
         squarify(r.children, new ArrayList<WNode>(), canvas, total_weight);
         
         for (WNode child: r.children) {
-            order(child, getNode(child.label).a, countries);
+            order(child, getNode(child.label).a, countries, state);
         }
-        drawAll(r, countries);
+        drawAll(r, countries, state);
     }
     
     // renders all rectangles in a tree
-    void drawAll(WNode r, Country[] countries) {
-        drawRec(r, countries);
-        for (WNode c: r.children) drawAll(c, countries);
+    void drawAll(WNode r, Country[] countries, int state) {
+        drawRec(r, countries, state);
+        for (WNode c: r.children) drawAll(c, countries, state);
     }
     
     public void squarify(ArrayList<WNode> children, ArrayList<WNode> row, Area canvas, float total_weight) {

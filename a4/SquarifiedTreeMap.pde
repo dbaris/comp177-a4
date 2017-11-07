@@ -12,6 +12,7 @@ public class SquarifiedTreeMap{
   
     float x, y, w, h;
     boolean pressed;
+    int state;
   
     SquarifiedTreeMap (String treepath, float x, float y, float w, float h, Country[] countries) {
         tp = new TreeParser(treepath);
@@ -19,7 +20,7 @@ public class SquarifiedTreeMap{
         a = new Arrange(t); // pass the tree to be arranged
         startNode = t.root; // initialize the graph to the root
         area = new Area(x, y, w, h);
-        a.drawFrom(startNode, area, countries);
+        a.drawFrom(startNode, area, countries, 0);
         this.x = x;
         this.y = y;
         this.w = w;
@@ -27,6 +28,7 @@ public class SquarifiedTreeMap{
         transition = false;
         transparency = 255;
         this.pressed = false;
+        this.state = 0;
     }
     
     boolean onGraph(){
@@ -72,7 +74,7 @@ public class SquarifiedTreeMap{
             
         }
         area = new Area(x, y, w, h);
-        a.drawFrom(startNode, area, countries);
+        a.drawFrom(startNode, area, countries, this.state);
         
         fill(0);
         textAlign(CENTER, TOP);

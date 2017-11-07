@@ -50,6 +50,7 @@ public class MissionControl {
     if (clickState != -1) {
       this.plot.state = clickState;
       this.barState = clickState;
+      this.tree.state = clickState;
       if (mouseButton == RIGHT) {
         this.barState = 7;
         
