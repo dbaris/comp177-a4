@@ -22,7 +22,7 @@ public class ScatterPlot{
     return mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h;
   }
   
-  public void render(ArrayList<Country> countries, float maxHappy) {
+  public void render(Country[] countries, int numCountries, float maxHappy) {
       //println(this.state);
       stroke(0);
       line(this.x, this.y, this.x, this.y + this.h * 0.9);
@@ -46,15 +46,15 @@ public class ScatterPlot{
         line(this.x + 1, this.y + this.h * 0.9 - interval * i, this.x + this.w, this.y + this.h * 0.9 - interval * i);
       }
       
-      float minValue = countries.get(0).scores[state];
-      float maxValue = countries.get(0).scores[state];
-      float minHappy = countries.get(0).happinessScore;
-      maxHappy = countries.get(0).happinessScore;
+      float minValue = countries[0].scores[state];
+      float maxValue = countries[0].scores[state];
+      float minHappy = countries[0].happinessScore;
+      maxHappy = countries[0].happinessScore;
       
       
-      for (int i = 1; i < countries.size(); i++) {
-          float cur_value = countries.get(i).scores[state];
-          float cur_happy = countries.get(i).happinessScore;
+      for (int i = 1; i < numCountries; i++) {
+          float cur_value = countries[i].scores[state];
+          float cur_happy = countries[i].happinessScore;
           if (cur_value < minValue) {
               minValue = cur_value;
           } 
@@ -97,14 +97,14 @@ public class ScatterPlot{
       text(str(float(int(minValue * 1000))/ 1000), this.x, this.y + this.h * .92);
       text(str(float(int(maxValue * 1000))/ 1000), this.x + this.w, this.y + this.h * .92);
       
-      for (int i = 0; i < countries.size(); i++) {
-          float cur_value = countries.get(i).scores[state];
-          float cur_happy = countries.get(i).happinessScore;
+      for (int i = 0; i < numCountries; i++) {
+          float cur_value = countries[i].scores[state];
+          float cur_happy = countries[i].happinessScore;
           float normalizeX = (cur_value - minValue)/ (maxValue - minValue);
           float normalizeY = (cur_happy - minHappy) / (maxHappy - minHappy);
           fill(cArray[this.state]);
           
-          if (countries.get(i).hover) {
+          if (countries[i].hover) {
             colorMode(HSB, 360, 100, 100);
             fill(hue(cArray[this.state]), saturation(cArray[this.state]), brightness(cArray[this.state]) + 50);
             colorMode(RGB, 255);
@@ -113,9 +113,9 @@ public class ScatterPlot{
           if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
             if (abs(mouseX - (normalizeX * this.w + this.x)) < this.diameter/2 && 
                 abs(mouseY - ((this.y + this.h * .9) - this.h * 0.9 * normalizeY)) < this.diameter/2) {
-                  countries.get(i).hover = true;
+                  countries[i].hover = true;
             } else {
-                  countries.get(i).hover = false;
+                  countries[i].hover = false;
             }
           }
           

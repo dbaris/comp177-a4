@@ -1,5 +1,5 @@
-import java.util.*;
-import java.lang.*;
+//import java.util.*;
+//import java.lang.*;
 
 color[][] colorArray = {{color(205, 136, 0), #CCA1BA, #A45784, #762956, #5C2043},
                         {color(205, 136, 0), #A2BFD1, #457FA4, #004877, #00243C},

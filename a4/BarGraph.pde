@@ -1,4 +1,4 @@
-import java.util.*;
+//import java.util.*;
 
 public class BarGraph{
 
@@ -23,13 +23,13 @@ public class BarGraph{
       
     }
   
-    public void render(ArrayList<Country> countries, int barState, float maxHappy){
+    public void render(Country[] countries, int numCountries, int barState, float maxHappy){
         textAlign(CENTER, TOP);
         fill(0);
         text(this.labels[barState], this.x + this.w/2, this.y + this.h);
       
         float ratio = this.w * .85 / maxHappy;
-        float interval = this.h / countries.size();
+        float interval = this.h / numCountries;
         float barHeight = interval * 0.9;
         
         if (barHeight > 60) {
@@ -39,9 +39,9 @@ public class BarGraph{
         float barPos = this.x + this.w * 0.15;
         
         if (barState != 7) {
-          float maxVal = countries.get(0).scores[barState];
-          for (int i = 1; i < countries.size(); i++) {
-            float testVal = countries.get(i).scores[barState];
+          float maxVal = countries[0].scores[barState];
+          for (int i = 1; i < numCountries; i++) {
+            float testVal = countries[i].scores[barState];
             if (testVal > maxVal) {
               maxVal = testVal;
             }
@@ -50,98 +50,98 @@ public class BarGraph{
         }
         
         if (barState == 7) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.happinessScore);
-                    Float s2 = new Float(p2.happinessScore);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.happinessScore);
+            //        Float s2 = new Float(p2.happinessScore);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 0) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[0]);
-                    Float s2 = new Float(p2.scores[0]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[0]);
+            //        Float s2 = new Float(p2.scores[0]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 1) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[1]);
-                    Float s2 = new Float(p2.scores[1]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[1]);
+            //        Float s2 = new Float(p2.scores[1]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 2) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[2]);
-                    Float s2 = new Float(p2.scores[2]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[2]);
+            //        Float s2 = new Float(p2.scores[2]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 3) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[3]);
-                    Float s2 = new Float(p2.scores[3]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[3]);
+            //        Float s2 = new Float(p2.scores[3]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 4) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[4]);
-                    Float s2 = new Float(p2.scores[4]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[4]);
+            //        Float s2 = new Float(p2.scores[4]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 5) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[5]);
-                    Float s2 = new Float(p2.scores[5]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[5]);
+            //        Float s2 = new Float(p2.scores[5]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         } else if (barState == 6) {
-            Collections.sort(countries, new Comparator<Country>(){
-                public int compare(Country p1, Country p2){
-                    Float s1 = new Float(p1.scores[6]);
-                    Float s2 = new Float(p2.scores[6]);
-                    return -s1.compareTo(s2);
-                }
-            });
+            //Collections.sort(countries, new Comparator<Country>(){
+            //    public int compare(Country p1, Country p2){
+            //        Float s1 = new Float(p1.scores[6]);
+            //        Float s2 = new Float(p2.scores[6]);
+            //        return -s1.compareTo(s2);
+            //    }
+            //});
         }
         
         
-        for (int i = 0; i < countries.size(); i++) {
+        for (int i = 0; i < numCountries; i++) {
             float xPos = barPos;
             
             fill(0);
             textAlign(RIGHT, TOP);
             textSize(9);
-            text(countries.get(i).name, barPos - width * .01, this.y + interval * i + barHeight/2);
+            text(countries[i].name, barPos - width * .01, this.y + interval * i + barHeight/2);
 
             if (barState == 7) {
               
               for (int j = 0; j < 7; j++) {
                   fill(colors[j]);
                   
-                  if (countries.get(i).hover) {
+                  if (countries[i].hover) {
                     colorMode(HSB, 360, 100, 100);
                     fill(hue(colors[j]), saturation(colors[j]), brightness(colors[j]) + 20);
                     colorMode(RGB, 255);
                   }
                   noStroke();
-                  rect(xPos, this.y + interval * i, ratio * countries.get(i).scores[j], barHeight);
-                  xPos += ratio * countries.get(i).scores[j];
+                  rect(xPos, this.y + interval * i, ratio * countries[i].scores[j], barHeight);
+                  xPos += ratio * countries[i].scores[j];
     
               }
               
-              if (countries.size() == 1) {
-                  Country c = countries.get(0);
+              if (numCountries == 1) {
+                  Country c = countries[0];
                   int k;
                   for (k = 0; k < 7; k++) {
                       fill(colors[k]);
@@ -155,16 +155,16 @@ public class BarGraph{
               
               if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
                   if (mouseX > barPos && mouseX < xPos && mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
-                      countries.get(i).hover = true;
+                      countries[i].hover = true;
                   } else {
-                      countries.get(i).hover = false;
+                      countries[i].hover = false;
                   }
               }
             } else {
               
               fill(colors[barState]);
               
-              if (countries.get(i).hover) {
+              if (countries[i].hover) {
                     colorMode(HSB, 360, 100, 100);
                     fill(hue(colors[barState]), saturation(colors[barState]), brightness(colors[barState]) + 20);
                     colorMode(RGB, 255);
@@ -172,14 +172,14 @@ public class BarGraph{
               }
               
               noStroke();
-              rect(barPos, this.y + interval * i, ratio * countries.get(i).scores[barState], barHeight);
+              rect(barPos, this.y + interval * i, ratio * countries[i].scores[barState], barHeight);
               
               if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
-                if (mouseX > barPos && mouseX < ratio * countries.get(i).scores[barState] + this.x && 
+                if (mouseX > barPos && mouseX < ratio * countries[i].scores[barState] + this.x && 
                     mouseY > this.y + interval * i && mouseY < this.y + interval * i + barHeight) {
-                    countries.get(i).hover = true;
+                    countries[i].hover = true;
                 } else {
-                    countries.get(i).hover = false;
+                    countries[i].hover = false;
                 }
               }
               
@@ -189,7 +189,7 @@ public class BarGraph{
         
     }
     
-    boolean checkHover(ArrayList<Country> countries){
+    boolean checkHover(Country[] countries){
       return (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h);
     }
     

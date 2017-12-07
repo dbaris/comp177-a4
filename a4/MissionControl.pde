@@ -26,20 +26,22 @@ public class MissionControl {
  
   public void render(){
     float maxHappy = 0;
-    ArrayList <Country> markedCountries = new ArrayList <Country>();
+    int numMarked = 0;
+    Country[] markedCountries = new Country [this.countries.length];
     for (int i = 0; i < this.countries.length; i++){
-      if (this.countries[i].isMarked) {
-        markedCountries.add(this.countries[i]);
+      if (this.countries[i].isMarked){
+        markedCountries[numMarked] = this.countries[i];
         if(this.countries[i].happinessScore > maxHappy) {
-          maxHappy = this.countries[i].happinessScore;
-          
+          maxHappy = this.countries[i].happinessScore;  
         }
+        numMarked++;
       }
+      
     }
 
     this.sidebar.render();
-    this.bar.render(markedCountries, barState, maxHappy);
-    this.plot.render(markedCountries, maxHappy);
+    this.bar.render(markedCountries, numMarked, barState, maxHappy);
+    this.plot.render(markedCountries, numMarked, maxHappy);
     this.tree.render(countries);
   }
   
