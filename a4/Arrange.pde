@@ -1,13 +1,6 @@
 import java.util.*;
 import java.lang.*;
 
-//color[] pinkArray = {color(205, 136, 0), #CCA1BA, #A45784, #762956, #5C2043};
-//color[] blueArray = {color(205, 136, 0), #A2BFD1, #457FA4, #004877, #00243C};
-//color[] purpleArray = {color(205, 136, 0), #BEAEBB, #6E4966, #401C38, #240F1F};
-//color[] greenArray = {color(205, 136, 0), #A2BCA2, #457945, #004200, #002E00};
-//color[] yellowArray = {color(0, 79, 130), #ECD3A2, #DAA845, #BB7C00, #5E3E00};
-//color[] IndigoArray = {color(205, 136, 0), #457FA4, #004F82, #003A5F, #00243C};
-//color[] redArray = {color(205, 136, 0), #C39595, #944141, #671313, #390B0B};
 color[][] colorArray = {{color(205, 136, 0), #CCA1BA, #A45784, #762956, #5C2043},
                         {color(205, 136, 0), #A2BFD1, #457FA4, #004877, #00243C},
                         {color(205, 136, 0), #BEAEBB, #6E4966, #401C38, #240F1F},
@@ -175,9 +168,11 @@ public class Arrange{
             nc.parent = r.label;
         }
         // sort all children in working tree from biggest to smallest
-        Collections.sort(r.children, new Comparator<WNode>(){
-            public int compare(WNode n1, WNode n2) {
-                return int(n2.weight - n1.weight);}});
+        //Collections.sort(r.children, new Comparator<WNode>(){
+        //    public int compare(WNode n1, WNode n2) {
+        //        return int(n2.weight - n1.weight);
+        //      }
+        //});
     }
 
     // lays out children from r on canvas
