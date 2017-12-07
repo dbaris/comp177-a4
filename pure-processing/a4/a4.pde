@@ -4,7 +4,7 @@ Parser p;
 MissionControl mc;
 
 void setup() {  
-  //fullScreen();
+  fullScreen();
   p = new Parser(filepath);
   mc = new MissionControl(p.countries);
 }

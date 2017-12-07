@@ -1,0 +1,156 @@
+class Node {
+    String label;
+    int weight;
+    Node parent;
+    int level;
+    ArrayList<Node> children;
+    
+    Node(String l, int w) {
+        label = l;
+        weight = w;
+        parent = null;
+        level = 0;
+        children = new ArrayList<Node>();
+    }
+}
+
+public class Tree {
+  
+    Node root;
+    ArrayList<Node> allNodes;
+    String[] labels, parents, children;
+    int[] weights;
+  
+    Tree(String[] labels, int[] weights, String[] parents, String[] children) {
+        //println(labels);
+        
+      
+        this.allNodes = new ArrayList<Node>(); 
+        this.labels = labels;
+        this.parents = parents;
+        this.children = children;
+        this.weights = weights;
+        
+        if (this.parents.length == 0) { // if tree is empty, set root to null
+            this.root = null;
+        } else {
+            this.root = new Node(this.parents[0], this.getWeight(this.parents[0], this.labels, this.weights));
+            this.allNodes.add(this.root); // add root to the list of all nodes
+            
+            for (int i = 0; i < this.parents.length; i++) { // iterating through the parents
+                boolean newNode = false;               // assume it's already seen
+                Node r = this.getNode(this.parents[i]);     // null if new parent
+                Node c = this.getNode(this.children[i]);    // null if new child
+                // if either parent or child is new, make new
+                // nodes, then add to list of all nodes
+                if (r == null) { 
+                    //println(this.parents[i]);
+                    r = new Node(this.parents[i], this.getWeight(this.parents[i], this.labels, this. weights));
+                    this.allNodes.add(r);
+                }
+                if (c == null) {
+                    newNode = true;
+                    c = new Node(this.children[i], this.getWeight(this.children[i], this.labels, this.weights));
+                    this.allNodes.add(c);
+                }
+
+                if (!newNode && !isRoot(c.label)) {
+                    Node oldParent = c.parent;
+                    appendChild(oldParent, r);
+                    r.parent = oldParent;
+                }
+                
+                this.appendChild(r, c);
+                if (this.isRoot(c.label)){
+                    this.root = r;
+                }
+            }
+        }
+        root.weight = updatedWeights(root);
+        int maxLevel = 0;
+        for (Node c: root.children) {
+            if (c.level > maxLevel) maxLevel = c.level;
+        }
+        root.level = maxLevel + 1;
+        trickleDown(root);
+        
+    }
+    
+    boolean isRoot(String label) {
+        return(label == root.label);
+    }
+    
+    void trickleDown(Node r) {
+          for (Node c: r.children) {
+              c.level = r.level - 1;
+              trickleDown(c);
+          }
+    }
+    
+    void printTree(Node r) { // for debugging purposes
+        if (r == null) return;
+        for (Node child: r.children) println(child.label); //printTree(child);
+    }
+    
+    Node getParentNode(String label) {
+        return getNode(label).parent;
+    }
+    
+    int getWeight(String label, String[] labels, int[] weights) {
+        for (int i = 0; i < labels.length; i++) {
+            if (labels[i] == label) return weights[i];
+        }
+        return 0;
+    }
+    
+    Node getNode(String label) {
+        Node result = null; //getNodeInternal(label, this.root);
+        if (result == null) {
+            for (Node ch: this.allNodes) {
+                if (ch.label == label) {
+                    result = ch;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+    
+    Node getNodeInternal(String label, Node r) {
+        if (r == null) {
+            return null;
+        } else if (r.label == label) {
+            return r;
+        } else {
+            Node result = null;
+            for (Node child: r.children) {
+                result = getNodeInternal(label, child);
+                if (result != null) break;
+            }
+            return result;
+        }
+    }
+    
+    void appendChild(Node parent, Node child) {
+        child.parent = parent;
+        parent.children.add(child);
+    }
+    
+    // to trickle up weights to the parents
+    int updatedWeights(Node r){
+        if (r.children.size() == 0) {
+            r.level = 1;
+            return r.weight;
+        }
+        int sum = 0;
+        int maxLevel = 0;
+        for (Node c: r.children) {
+            sum += updatedWeights(c);
+            if (c.level > maxLevel) maxLevel = c.level;
+        }
+        r.level = maxLevel + 1;
+        r.weight = sum;
+        return sum;
+    }
+
+}
