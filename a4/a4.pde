@@ -1,5 +1,5 @@
-String filepath = "simple.csv";
-String treepath = "simple_tree.csv";
+String filepath = "a4/simple.csv";
+String treepath = "a4/simple_tree.csv";
 Parser p;
 MissionControl mc;
 
