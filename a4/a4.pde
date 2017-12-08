@@ -3,9 +3,11 @@ String treepath = "a4/simple_tree.csv";
 Parser p;
 MissionControl mc;
 
+
+
 void setup() {  
   //fullScreen();
-  setSize(1000,600);
+  size(1000,600);
   p = new Parser(filepath);
   mc = new MissionControl(p.countries);
 }
