@@ -1,7 +1,8 @@
-/*body {
-	background: green;
+body {
+	/*background: green;*/
+	text-align: center;
 }
-*/
+
 canvas {
 	/*background: blue;*/
 	width: 1200px;

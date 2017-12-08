@@ -7,7 +7,7 @@ MissionControl mc;
 
 void setup() {  
   //fullScreen();
-  size(1200,500);
+  size(800,400);
   p = new Parser(filepath);
   mc = new MissionControl(p.countries);
 }
